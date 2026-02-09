@@ -9,27 +9,13 @@ import { DarkModeProvider } from './Components/DarkMode';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>
-        resolvePageComponent(
-            `./Pages/${name}.jsx`,
-            import.meta.glob('./Pages/**/*.jsx'),
-        ),
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
     setup({ el, App, props }) {
-        const app = (
+        const root = createRoot(el);
+        root.render(
             <DarkModeProvider>
                 <App {...props} />
             </DarkModeProvider>
         );
-
-        /* if (import.meta.env.SSR) {
-            hydrateRoot(el, app);
-            return;
-        } */
-
-        createRoot(el).render(app);
-    },
-    progress: {
-        color: '#4B5563',
     },
 });
