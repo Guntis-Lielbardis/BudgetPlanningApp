@@ -49,10 +49,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::patch('/user/preferences', [UserController::class, 'updatePreferences']);
-});
-
 Route::post('/income-sources', [IncomeSourceController::class, 'store']);
 Route::get('/income-sources', [IncomeSourceController::class, 'index']);
 Route::post('/expense-sources', [ExpenseSourceController::class, 'store']);
