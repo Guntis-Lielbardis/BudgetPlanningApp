@@ -4,6 +4,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { MdLogout } from "react-icons/md";
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
@@ -77,9 +78,9 @@ export default function AuthenticatedLayout({ header, children }) {
                                             href={route('logout')}
                                             method="post"
                                             as="button"
-                                            className="block w-full px-4 py-2 bg-white dark:bg-gray-600 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                            className="flex items-center block w-full px-4 py-2 bg-white dark:bg-gray-600 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                                         >
-                                            Iziet
+                                            <MdLogout className="text-lg"/>Iziet
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
