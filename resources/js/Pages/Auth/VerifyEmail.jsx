@@ -13,7 +13,7 @@ export default function VerifyEmail({ status }) {
 
     return (
         <GuestLayout>
-            <Head title="Email Verification" />
+            <Head title="E-pasta apstiprināšana" />
 
             <div className="mb-4 text-sm text-gray-600">
                 Paldies par reģistrāciju! Pirms darba uzsākšanas, vai Jūs varētu

@@ -17,7 +17,7 @@ export default function ForgotPassword({ status }) {
 
     return (
         <GuestLayout>
-            <Head title="Forgot Password" />
+            <Head title="Aizmirsāt paroli" />
 
             <div className="mb-4 text-sm text-gray-600">
                 Ievadiet savu e-pasta adresi, lai varētu nosūtīt saiti, kas dod iespēju nomainīt paroli.
