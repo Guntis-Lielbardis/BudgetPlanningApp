@@ -20,7 +20,7 @@ export default function Dashboard() {
     const [incomeSource, setIncomeSource] = useState();
     const [totalSum, getTotalSum] = useState(0);
     const [selectedCurrency, setSelectedCurrency] = useState(() => {
-        return localStorage.getItem("currency") || "Valūta";
+        return localStorage.getItem("currency") || "Eiro €";
     });
     const [description, setDescription] = useState("");
     const [editingRowId, setEditingRowId] = useState(null);
@@ -59,7 +59,7 @@ export default function Dashboard() {
             setIncomeSources(response.data.incomeSources || []);
             getTotalSum(response.data.sum);
         } catch (error) {
-            console.error('Failed to fetch income sources:', error);
+            console.error('Neizdevās nolasīt ienākumu avotus:', error);
         }
     };
     
@@ -78,7 +78,7 @@ export default function Dashboard() {
                 }
             })
             .catch((error) => {
-                console.error('Failed to fetch user theme:', error);
+                console.error('Neizdevās nolasīt lietotāja režīmu:', error);
                 setIsThemeLoaded(true);
             });
     }, []);
@@ -168,7 +168,7 @@ export default function Dashboard() {
             getTotalSum2(response.data.sum);
         } 
         catch (error) {
-            console.error('Error fetching expense sources:', error);
+            console.error('Neizdevās nolasīt izdevumu avotus:', error);
         }
     };
 
