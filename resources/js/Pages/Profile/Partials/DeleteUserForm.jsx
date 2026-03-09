@@ -61,12 +61,12 @@ export default function DeleteUserForm({ className = '' }) {
             </DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
-                <form onSubmit={deleteUser} className="p-6">
-                    <h2 className="text-lg font-medium text-gray-900">
+                <form onSubmit={deleteUser} className="p-6 dark:bg-gray-700">
+                    <h2 className="text-lg font-medium text-gray-900 dark:text-gray-200">
                         Vai esat pārliecināti, ka vēlaties dzēst kontu?
                     </h2>
 
-                    <p className="mt-1 text-sm text-gray-600">
+                    <p className="mt-1 text-md text-gray-600 dark:text-gray-400">
                         Kad jūsu konts tiks dzēsts, visi tā dati neatgriezeniski pazudīs. Lūdzu, ievadiet paroli, lai apstiprinātu, ka vēlaties neatgriezeniski dzēst kontu.
                     </p>
 
@@ -86,9 +86,9 @@ export default function DeleteUserForm({ className = '' }) {
                             onChange={(e) =>
                                 setData('password', e.target.value)
                             }
-                            className="mt-1 block w-3/4"
+                            className="mt-1 block w-3/4 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
                             isFocused
-                            placeholder="Password"
+                            placeholder="Parole"
                         />
 
                         <InputError
@@ -98,7 +98,7 @@ export default function DeleteUserForm({ className = '' }) {
                     </div>
 
                     <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>
+                        <SecondaryButton className="dark:bg-gray-700 dark:text-white" onClick={closeModal}>
                             Atcelt
                         </SecondaryButton>
 
