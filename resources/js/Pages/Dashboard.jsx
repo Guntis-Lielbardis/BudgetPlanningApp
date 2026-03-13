@@ -553,7 +553,7 @@ export default function Dashboard() {
 
                                         {errorMessageIncome && (<p className="text-red-500 font-semibold">{errorMessageIncome}</p>)}
 
-                                        {incomeSources?.length > 0 &&(
+                                        {incomeSources?.length > 0 ?(
                                         <div>
                                             <table className="table-auto bg-white dark:bg-gray-800 dark:text-gray-400">
                                                 <thead>
@@ -680,11 +680,13 @@ export default function Dashboard() {
                                             <p className="font-bold text-gray-900 dark:text-gray-200 mt-2">Kopā: {totalSum.toFixed(2)}</p>
                                             <Pagination pageCount={pageCount} onPageChange={handlePageChangeIncome} />
                                         </div>
-                                        )}
+                                        ):<div>
+                                            <p className="my-10 text-center text-[25px] font-semibold">&#128181;<span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-indigo-800">Nav datu. Pievienojiet kādu ienākumu avotu!</span>&#128181;</p>
+                                          </div>}
                                     </div>
                                 </div>
                                 
-                                <div className="pt-5">
+                                <div>
                                     <h2 className="text-lg font-bold text-gray-900 dark:text-gray-200">Izdevumu avoti</h2>
                                     <div className="space-y-2">
                                         <div className="flex items-start gap-3">
@@ -733,7 +735,7 @@ export default function Dashboard() {
 
                                         {errorMessageExpense && (<p className="text-red-500 font-semibold">{errorMessageExpense}</p>)}
 
-                                        {expenseSources?.length > 0 &&(
+                                        {expenseSources?.length > 0 ?(
                                         <div>
                                             <table className="table-auto bg-white dark:bg-gray-800 dark:text-gray-400">
                                                 <thead>
@@ -888,7 +890,9 @@ export default function Dashboard() {
                                             <p className="font-bold text-gray-900 dark:text-gray-200 mt-2">Kopā: {totalSum2.toFixed(2)}</p>
                                             <Pagination pageCount={pageCount2} onPageChange={handlePageChangeExpense} />
                                         </div>
-                                        )}
+                                        ):<div>
+                                            <p className="my-10 text-center text-[25px] font-semibold">&#128181;<span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-indigo-800">Nav datu. Pievienojiet kādu izdevumu avotu!</span>&#128181;</p>
+                                          </div>}
                                     </div>
                                 </div>
                                 
