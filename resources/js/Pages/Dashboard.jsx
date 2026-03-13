@@ -17,7 +17,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
   
 export default function Dashboard() {
-    const [incomeSource, setIncomeSource] = useState();
+    const [incomeSource, setIncomeSource] = useState("");
     const [totalSum, getTotalSum] = useState(0);
     const [selectedCurrency, setSelectedCurrency] = useState(() => {
         return localStorage.getItem("currency") || "Eiro €";
@@ -33,6 +33,9 @@ export default function Dashboard() {
     const addIncomeSource = async () => {
         if (!description.trim() || !incomeSource) {
             setIncomeErrorMessage("Lūdzu aizpildiet abus laukus!");
+            setTimeout(() => {
+            setIncomeErrorMessage("");
+        }, 5000);
             return;
         }
     
@@ -139,6 +142,9 @@ export default function Dashboard() {
     const addExpenseSource = async () => {
         if (!description2.trim() || !expenseSource) {
             setExpenseErrorMessage("Lūdzu aizpildiet abus laukus!");
+            setTimeout(() => {
+            setExpenseErrorMessage("");
+        }, 5000);
             return;
         }
         
