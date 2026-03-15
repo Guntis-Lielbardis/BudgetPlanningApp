@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IncomeSourceController;
 use App\Http\Controllers\ExpenseSourceController;
+use App\Http\Controllers\BugReportController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -18,13 +19,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
+Route::middleware(['auth', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->get('/about', function () {
     return Inertia::render('About');
 })->name('about');
+
+Route::middleware(['auth', 'verified'])->get('/bugreport', function () {
+    return Inertia::render('BugReport');
+})->name('bugreport');
 
 Route::middleware('auth:sanctum')->put('/user/settings', [ProfileController::class, 'updateSettings']);
 Route::middleware(['auth'])->put('/user/theme', function (Request $request) {
@@ -48,6 +53,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::post('/bug_report', [BugReportController::class, 'send']);
 
 Route::post('/income-sources', [IncomeSourceController::class, 'store']);
 Route::get('/income-sources', [IncomeSourceController::class, 'index']);

@@ -35,10 +35,11 @@ Tālākā instalācija turpinās terminālī.<br>
 * Failu pārlūkā dodas uz projekta datubāzes(database) mapi, izveido jaunu failu ar nosaukumu "database.sqlite".
 * Izveidotajai datubāzei veic migrācijas: ```php artisan migrate```
 * Lai sāktu PHP serveri: ```php artisan serve```
-* Jaunā terminālī šajā pašā lokācijā startē Vite serveri: ```npm run dev```.
+* Jaunā terminālī šajā pašā lokācijā startē Vite serveri: ```npm run dev```. <br><br>
+* __P.S.__ Lai testētu lokāli "Bug report" funkciju ar SMTP, nepieciešams personīgais Google profila lietotājvārds, ko pievieno .env failā sadaļā "MAIL_USERNAME". 
+* Nepieciešams ģenerēt "App password" un pievienot bez atstarpēm .env failā pie "MAIL_PASSWORD". Vienkāršības labad "MAIL_FROM_ADDRESS" un "BUG_REPORT_EMAIL" jāsakrīt(Tiek nosūtīta ziņa sev).
 # 3. Perspektīvas nākotnē
 * Personalizēti budžeta ieteikumi
 * Valūtu konvertācija
 * Atgādinājumi e-pastā
 * Papildus profila iestatījumi
-* "Bug report" sekcija

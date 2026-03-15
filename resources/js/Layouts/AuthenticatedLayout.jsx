@@ -37,6 +37,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     <div className="dark:text-white">Par aplikāciju</div>
                                 </NavLink>
+                                <NavLink
+                                    href={route('bugreport')}
+                                    active={route().current('bugreport')}
+                                >
+                                    <div className="dark:text-white">Ziņot par kļūdu</div>
+                                </NavLink>
                             </div>
                         </div>
 
