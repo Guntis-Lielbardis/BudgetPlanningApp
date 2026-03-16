@@ -30,7 +30,7 @@ export default function BugReport({ auth }) {
                 <h1 className="text-center font-semibold my-5">Šeit varat paziņot par atrastām kļūdām aplikācijā!</h1>
             </div>
             <form className="relative" onSubmit={submit}>
-                <textarea className="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-700 resize-none w-1/2 rounded-md" value={data.message} onChange={(e) => setData("message", e.target.value)} rows="6" maxLength="500" required/>
+                <textarea className="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-700 dark:text-gray-200 dark:bg-gray-700 resize-none w-1/2 rounded-md" value={data.message} onChange={(e) => setData("message", e.target.value)} rows="6" maxLength="500" required/>
                 <SecondaryButton type="submit" className="absolute right-[200px] top-[110px]" disabled={processing}>{processing ? "Nosūta" : "Iesniegt"}</SecondaryButton>
                 {messageStatus && (
                 <p className="absolute top-[180px] left-1/2 transform -translate-x-1/2 text-green-500">
