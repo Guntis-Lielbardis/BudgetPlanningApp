@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Http\Request;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +29,8 @@ class AppServiceProvider extends ServiceProvider
         {
             URL::forceScheme('https');
         }
+        RateLimiter::for('bug_report', function (Request $request) {
+            return Limit::perHour(1)->by($request->user()->id);
+        });
     }
 }

@@ -54,15 +54,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/bug_report', [BugReportController::class, 'send']);
-
+Route::post('/bug_report', [BugReportController::class, 'send'])->middleware(['auth','throttle:bug_report']);
 Route::post('/income-sources', [IncomeSourceController::class, 'store']);
-Route::get('/income-sources', [IncomeSourceController::class, 'index']);
 Route::post('/expense-sources', [ExpenseSourceController::class, 'store']);
+Route::get('/income-sources', [IncomeSourceController::class, 'index']);
 Route::get('/expense-sources', [ExpenseSourceController::class, 'index']);
 Route::put('/income-sources/{id}', [IncomeSourceController::class, 'update']);
-Route::delete('/income-sources/{incomeSource}', [IncomeSourceController::class, 'destroy']);
 Route::put('/expense-sources/{id}', [ExpenseSourceController::class, 'update']);
+Route::delete('/income-sources/{incomeSource}', [IncomeSourceController::class, 'destroy']);
 Route::delete('/expense-sources/{expenseSource}', [ExpenseSourceController::class, 'destroy']);
 
 require __DIR__.'/auth.php';
