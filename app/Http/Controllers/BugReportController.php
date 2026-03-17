@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\BugReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,11 @@ class BugReportController extends Controller
         ]);
 
         $user=Auth::user();
+        BugReport::create([
+            'buginfo' =>$request->message,
+            'user_id'=>$user->id,
+        ]);
+
         Mail::to(config('mail.bug_report_address'))
             ->send(new BugReportMail($request->message,$user->name,$user->email));
         return back()->with('success', 'Bug report sent!');
