@@ -1,45 +1,46 @@
-# 1. Tīmekļa aplikācija individuālā budžeta plānošanai
-Ir iebūvēta autentifikācija: e-pasta adrese un parole. Funkcionalitāte sastāv no informācijas panelī esošām CRUD operācijām-ierakstu izveidošana, nolasīšana, atjaunināšana, dzēšana. Papildus ir grafisks attēlojums, ierakstu dalījums pa atsevišķām lapām, ierakstu filtrēšana, ienākumu un izdevumu salīdzinājums, profila lapa, paskaidrojošā lapa. Projekts realizēts, izmantojot MVC(modelis-skats-kontrolieris) arhitektūru. Tas palīdz veikt HTTP pieprasījumus datubāzei. Ērtai aplikācijas izveidei bija izmantots Vite serveris, kas atļauj dinamiski mainīt kodu un uzreiz redzēt izmaiņas ekrānā. Vietne ir uzstādīta Render platformā. Datubāzei izmantots Neon PostgreSQL risinājums vietnē Render, bet lokālai izstrādei SQLite.
-## 1.1. Frontend tehnoloģijas
+# 1. Web application for individual budget planning
+It has built-in authentication: email address and password. Functionality offers CRUD operations in dashboard-creating, reading, updating, deleting budget records. Additionally included graphics with Chart.js, pagination, filtering by month or category, comparison between income and expenses, profile page, about page, bug report page. Project was implemented, using MVC architecture. It helps making HTTP requests to database. During development Vite server was used, which allows to dynamically update code and right away observe page changes. Application is hosted in Render: https://budgetplanningapp.onrender.com. For database in production Neon PostgreSQL service was used in Render, bet local development- SQLite.
+## 1.1. Frontend technologies
 * Javascript
 * React
 * Tailwind CSS
 * Chart.js
-## 1.2. Backend tehnoloģijas
+## 1.2. Backend technologies
 * PHP
 * Laravel
 * PostgreSQL
-# 2. Projekta instalācija datorā
-## 2.1. Nepieciešamās programmas
+# 2. Project installation in PC
+## 2.1. Necessary programs
 * PHP <br>
-Atver PHP lejupielādes saiti: https://www.php.net/downloads.php
-Izvēlas Thread Safe Zip versiju lejupielādei. Izvelk no Zip arhīva. Tad no lejupielādes mapes tas jāpārvieto uz ```C:\Program Files\php-8.5.3```. Noslēgumā nepieciešams pievienot PHP sadaļā "Environment variables". Atver Start-> Edit the system environment variables-> Environment Variables-> System variables-> Nospiež uz Path, izvēlas Edit.-> Nospiež pogu New un iekopē PHP lokāciju uz diska.->Visu apstiprina ar OK.
+Open PHP downloads site: https://www.php.net/downloads.php
+Choose Thread Safe Zip version. Extract from archive. Then from Downloads folder it gets moved to ```C:\Program Files\php-8.5.3```. In the end PHP environment variables are added. Open Start-> Edit the system environment variables-> Environment Variables-> System variables-> Path-> Edit.-> New and then paste the PHP location there.->Confirm with OK.
 * Composer <br>
-Sākt Composer lejupielādi var: https://getcomposer.org/download/
-Sadaļā Windows Installer izvēlas zilā krāsā izceltu failu ```Composer-Setup.exe```. Pēc tā aktivizēšanas atvērsies dialoga logs instalācijas procesam. Var izvēlēties instalāciju visiem datora lietotājiem vai tikai sev. Vēlāk nospiež 3 reizes pogu Next un beigās Install. Kad instalācija beigusies, nospiež Next un Finish. Lai pārbaudītu, vai instalācija notikusi pareizi, terminālī var ievadīt "composer".
+Begin Composer download: https://getcomposer.org/download/
+In Windows Installer choose file marked in blue: ```Composer-Setup.exe```. A dialog window will appear for installation. It offers installing for all PC users or single user. Later click 3 times Next and in the end Install. Once done, click Next and Finish. To check if installation was successful, in terminal(Command prompt) optionally can type "composer".
 * Node.js <br>
-Atver: https://nodejs.org/en/download
-Jāizvēlas ```Windows Installer (.msi)```. Instalācijas logā spiež Next->Piekrīt noteikumiem un spiež Next vēl 4 reizes->Install->Finish
-## 2.2. Klonēšana
-Datorā jāizveido jauna tukša mape, kur glabāsies projekts. Atver projekta repozitoriju Github, sadaļā Code nokopē HTTPS saiti. Pēc tam šajā mapē atver Command Prompt(termināli) un ievada "git clone" un vēl ielīmē Github saiti ar punktu beigās. Tas ir ```git clone https://github.com/Guntis-Lielbardis/BudgetPlanningApp.git .```
-## 2.3. Instalācijas gaita
-Atver php.ini, kas atrodas mapē ```C:\Program Files\php-8.5.3``` un aktivizē 2 paplašinājumus. Jānoņem semikolus sākumā.
-Atrod ```;extension=fileinfo``` un nomaina uz ```extension=fileinfo```
-Līdzīgā veidā ```;extension=pdo_sqlite``` nomaina uz ```extension=pdo_sqlite```<br>
-Tālākā instalācija turpinās terminālī.<br>
-* PHP bibliotēku instalācijai ievada: ```composer install --ignore-platform-reqs```. Ja veca PHP versija datorā, tad var vienkārši ```composer install```.
-* Lai varētu darboties ar Javascript bibliotēkām, to skaitā React, ievada ```npm install```
-* Izveido .env failu: ```copy .env.example .env```
-* Ģenerē aplikācijas atslēgu: ```php artisan key:generate``` <br>
-* Ja datubāzei izmantots SQLite, pārliecinās failā .env par to, ka savienojums ```DB_CONNECTION=sqlite``` ir iestatīts.
-* Failu pārlūkā dodas uz projekta datubāzes(database) mapi, izveido jaunu failu ar nosaukumu "database.sqlite".
-* Izveidotajai datubāzei veic migrācijas: ```php artisan migrate```
-* Lai sāktu PHP serveri: ```php artisan serve```
-* Jaunā terminālī šajā pašā lokācijā startē Vite serveri: ```npm run dev```. <br><br>
-* __P.S.__ Lai testētu lokāli "Bug report" funkciju ar SMTP, nepieciešams personīgais Google profila lietotājvārds, ko pievieno .env failā sadaļā "MAIL_USERNAME". 
-* Nepieciešams ģenerēt "App password" un pievienot bez atstarpēm .env failā pie "MAIL_PASSWORD". Vienkāršības labad "MAIL_FROM_ADDRESS" un "BUG_REPORT_EMAIL" jāsakrīt(Tiek nosūtīta ziņa sev).
-# 3. Perspektīvas nākotnē
-* Personalizēti budžeta ieteikumi
-* Valūtu konvertācija
-* Atgādinājumi e-pastā
-* Papildus profila iestatījumi
+Open: https://nodejs.org/en/download
+Choose ```Windows Installer (.msi)```. Click Next->Accept License agreement and click Next 4 more times->Install->Finish.
+## 2.2. Cloning
+In PC create an empty folder for storing project. Open repository in Github, copy HTTPS site from Code. Then open terminal in project's location and enter "git clone" and paste Github site with dot in the end. Example: ```git clone https://github.com/Guntis-Lielbardis/BudgetPlanningApp.git .```
+## 2.3. Installation process
+Open php.ini, it's location: ```C:\Program Files\php-8.5.3``` and enable 2 extensions. Remove semicolons at start of lines.
+Find ```;extension=fileinfo``` and change to ```extension=fileinfo```.
+Similarly ```;extension=pdo_sqlite``` to ```extension=pdo_sqlite```.<br>
+Further installation continues in terminal.<br>
+* PHP dependency manager is installed with: ```composer install --ignore-platform-reqs```. If PC has old PHP version, then simply ```composer install```.
+* To use React, enter command for installing node package manager: ```npm install```.
+* Generate an .env file: ```copy .env.example .env```.
+* Generate app key: ```php artisan key:generate```. <br>
+* If database uses SQLite, make sure that correct connection in .env file is set: ```DB_CONNECTION=sqlite```.
+* In file explorer go to project's database folder, create a new file called: "database.sqlite".
+* Run migrations: ```php artisan migrate```.
+* To start PHP server, run: ```php artisan serve```.
+* Parallelly open new terminal from project's location to start local development server: ```npm run dev```. <br><br>
+* __P.S.__ To locally test "Bug report" feature with Gmail SMTP, it's necessary to have Google profile username, which is added to .env file in <b>MAIL_USERNAME</b>.
+* Then generate "App password" and use it without spaces in .env file in <b>MAIL_PASSWORD</b>. For simplicity <b>MAIL_FROM_ADDRESS</b> and <b>BUG_REPORT_EMAIL</b> should match(Message is sent from and to the same person). Check ".env.example" to fill in correct values if needed.
+* Feature can be run using also the Resend API. In that case, in Resend platform key can be generated and pasted in new variable <b>RESEND_KEY</b>. Don't forget to change <b>MAIL_MAILER</b> to "resend" and <b>MAIL_FROM_ADDRESS</b> to "onboarding@resend.dev".
+# 3. Future perspectives
+* Personalized budget planning suggestions
+* Currency conversion
+* Reminders in email
+* Additional profile settings
