@@ -38,6 +38,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                     <div className="dark:text-white">Par aplikāciju</div>
                                 </NavLink>
                                 <NavLink
+                                    href={route('converter')}
+                                    active={route().current('converter')}
+                                >
+                                    <div className="dark:text-white">Valūtas konvertācija</div>
+                                </NavLink>
+                                <NavLink
                                     href={route('bugreport')}
                                     active={route().current('bugreport')}
                                 >

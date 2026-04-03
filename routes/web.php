@@ -7,6 +7,7 @@ use App\Http\Controllers\BugReportController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,10 @@ Route::middleware(['auth', 'verified'])->get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
+Route::middleware(['auth', 'verified'])->get('/converter', function () {
+    return Inertia::render('Converter');
+})->name('converter');
+
 Route::middleware(['auth', 'verified'])->get('/bugreport', function () {
     return Inertia::render('BugReport');
 })->name('bugreport');
@@ -46,6 +51,15 @@ Route::middleware(['auth'])->put('/user/theme', function (Request $request) {
 
 Route::middleware('auth')->get('/user/theme', function () {
     return response()->json(['dark_mode' => Auth::user()->dark_mode]);
+});
+
+Route::get('/api/rates/{from}', function ($from) {
+    $response = Http::get('https://api.frankfurter.app/latest', [
+        'from' => $from,
+        'to' => 'EUR,USD,GBP'
+    ]);
+
+    return $response->json();
 });
 
 Route::middleware('auth')->group(function () {
