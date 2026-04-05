@@ -3,14 +3,22 @@ const { useState, useEffect, useMemo } = React;
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import {Head} from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
+import AddConvertedAmount from '@/Components/AddConvertedAmount';
 
 export default function About({ auth }) {    
     const [rates, setRates] = useState({});
-
     const [startAmount, setStartAmount] = useState("");
     const [currencyFrom, setCurrencyFrom] = useState("EUR");
     const [currencyTo, setCurrencyTo] = useState("USD");
     const currencyList = ["EUR", "USD", "GBP"];
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     const converted = useMemo(() => {
         if (!startAmount || !rates[currencyTo]) return "";
@@ -28,6 +36,26 @@ export default function About({ auth }) {
     })
     .catch(err => console.error(err));
 }, [currencyFrom]);
+
+    const handleAddTransaction = async (type) => {
+        const payload = {
+            amount: converted,
+            currency: currencyTo,
+            description: "Konvertētais daudzums",
+        };
+
+        try {
+            if (type === "income") {
+                await axios.post('/income-sources', payload);
+            } else if (type === "expense") {
+                await axios.post('/expense-sources', payload);
+            }
+
+            setIsModalOpen(false);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <AuthenticatedLayout user={auth.user}>
@@ -76,6 +104,18 @@ export default function About({ auth }) {
                 <p>
                     Konvertētais apjoms: {startAmount===""? "":`${converted} ${currencyTo}`}
                 </p>
+                <button
+                    onClick={() => openModal()}
+                    className="flex items-center gap-1 text-white bg-green-700 hover:bg-green-800 rounded-lg text-sm px-4 py-2">
+                    Pievienot
+                </button>
+
+                <AddConvertedAmount
+                    isOpen={isModalOpen}
+                    onClose={() => closeModal()}
+                    onSelect={handleAddTransaction}
+                    message="Izvēlieties vēlamo iespēju"
+                />
             </div>
 
         </AuthenticatedLayout>

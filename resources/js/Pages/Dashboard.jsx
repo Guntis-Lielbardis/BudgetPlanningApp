@@ -20,7 +20,7 @@ export default function Dashboard() {
     const [incomeSource, setIncomeSource] = useState("");
     const [totalSum, getTotalSum] = useState(0);
     const [selectedCurrency, setSelectedCurrency] = useState(() => {
-        return localStorage.getItem("currency") || "Eiro €";
+        return localStorage.getItem("currency") || "EUR";
     });
     const [description, setDescription] = useState("");
     const [editingRowId, setEditingRowId] = useState(null);
@@ -29,6 +29,13 @@ export default function Dashboard() {
     const [errorMessageExpense, setExpenseErrorMessage] = useState("");
     const [monthFilter, setMonthFilter] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
+    const currencies = [
+        { code: "EUR", label: "Eiro €" },
+        { code: "USD", label: "Dolāri $" },
+        { code: "GBP", label: "Mārciņas £" },
+    ];
+    const selectedCurrencyLabel =
+  currencies.find(c => c.code === selectedCurrency)?.label || selectedCurrency;
 
     const addIncomeSource = async () => {
         if (!description.trim() || !incomeSource) {
@@ -478,7 +485,7 @@ export default function Dashboard() {
                                                     type="button"
                                                     className="inline-flex items-center rounded-md mt-2 border border-transparent bg-white dark:bg-gray-700 dark:text-gray-300 px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                                 >
-                                                    {selectedCurrency}
+                                                    {selectedCurrencyLabel}
                                                     <svg
                                                         className="-me-0.5 ms-2 h-4 w-4"
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -496,15 +503,16 @@ export default function Dashboard() {
                                         </Dropdown.Trigger>
 
                                         <Dropdown.Content className="absolute left-0 mt-4 w-36 bg-white dark:bg-gray-900 dark:text-gray-400 rounded-md z-50">
-                                            <Dropdown.Link as="button" onClick={() => setSelectedCurrency("Eiro €")} className="block w-full px-4 py-2 bg-white dark:bg-gray-600 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                                Eiro €
-                                            </Dropdown.Link>
-                                            <Dropdown.Link as="button" onClick={() => setSelectedCurrency("Dolāri $")} className="block w-full px-4 py-2 bg-white dark:bg-gray-600 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                                Dolāri $
-                                            </Dropdown.Link>
-                                            <Dropdown.Link as="button" onClick={() => setSelectedCurrency("Mārciņas £")} className="block w-full px-4 py-2 bg-white dark:bg-gray-600 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                                Mārciņas £
-                                            </Dropdown.Link>
+                                            {currencies.map(c => (
+                                                <Dropdown.Link
+                                                    key={c.code}
+                                                    as="button"
+                                                    onClick={() => setSelectedCurrency(c.code)}
+                                                    className="block w-full px-4 py-2 bg-white dark:bg-gray-600 text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                                    >
+                                                    {c.label}
+                                                </Dropdown.Link>
+                                            ))}
                                         </Dropdown.Content>
                                     </Dropdown>
                                 </div>
@@ -610,12 +618,12 @@ export default function Dashboard() {
                                                                         }
                                                                         className="border rounded px-2 py-1 bg-white dark:bg-gray-700 w-full"
                                                                     >
-                                                                        <option value="Eiro €">Eiro €</option>
-                                                                        <option value="Dolāri $">Dolāri $</option>
-                                                                        <option value="Mārciņas £">Mārciņas £</option>
+                                                                        <option value="EUR">Eiro €</option>
+                                                                        <option value="USD">Dolāri $</option>
+                                                                        <option value="GBP">Mārciņas £</option>
                                                                     </select>
                                                                 ) : (
-                                                                    source.currency
+                                                                    currencies.find(c => c.code === source.currency)?.label || source.currency
                                                                 )}
                                                             </td>
                                                             
@@ -710,12 +718,12 @@ export default function Dashboard() {
                                             </label>
                                             <br></br>
                                             <div className="mb-4">
-                                                    <label htmlFor="ChangeCategory" className="mr-2 dark:text-gray-200">Filtrēt pēc kategorijas:</label>
+                                                <label htmlFor="ChangeCategory" className="mr-2 dark:text-gray-200">Filtrēt pēc kategorijas:</label>
                                                     <select 
-                                                            id="ChangeCategory"
-                                                            value={selectedCategory}
-                                                            onChange={(e) => setSelectedCategory(e.target.value)}
-                                                            className="rounded-md px-3 py-2 dark:bg-gray-700 dark:text-gray-400">
+                                                        id="ChangeCategory"
+                                                        value={selectedCategory}
+                                                        onChange={(e) => setSelectedCategory(e.target.value)}
+                                                        className="rounded-md px-3 py-2 dark:bg-gray-700 dark:text-gray-400">
                                                         <option value="">Visas kategorijas</option>
                                                         <option value="Pārtika">Pārtika</option>
                                                         <option value="Transports">Transports</option>
@@ -791,12 +799,12 @@ export default function Dashboard() {
                                                                         }
                                                                         className="border rounded px-2 py-1 bg-white dark:bg-gray-700 w-full"
                                                                     >
-                                                                        <option value="Eiro €">Eiro €</option>
-                                                                        <option value="Dolāri $">Dolāri $</option>
-                                                                        <option value="Mārciņas £">Mārciņas £</option>
+                                                                        <option value="EUR">Eiro €</option>
+                                                                        <option value="USD">Dolāri $</option>
+                                                                        <option value="GBP">Mārciņas £</option>
                                                                     </select>
                                                                 ) : (
-                                                                    source.currency
+                                                                    currencies.find(c => c.code === source.currency)?.label || source.currency
                                                                 )}
                                                             </td>
 
