@@ -12,6 +12,7 @@ export default function About({ auth }) {
     const [currencyTo, setCurrencyTo] = useState("USD");
     const currencyList = ["EUR", "USD", "GBP"];
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -51,7 +52,9 @@ export default function About({ auth }) {
                 await axios.post('/expense-sources', payload);
             }
 
+            setSuccessMessage("\u2713 Konvertētais apjoms pievienots!");
             setIsModalOpen(false);
+            setTimeout(() => setSuccessMessage(""), 5000);
         } catch (error) {
             console.error(error);
         }
@@ -64,10 +67,10 @@ export default function About({ auth }) {
                 <label>
                     Ievadiet naudas summu:
                     <TextInput
-                    type="number"
-                    value={startAmount}
-                    className="h-10 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200"
-                    onChange={(e) => setStartAmount(Number(e.target.value))}
+                        type="number"
+                        value={startAmount}
+                        className="h-10 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200"
+                        onChange={(e) => setStartAmount(Number(e.target.value))}
                     />
                 </label>
 
@@ -109,6 +112,12 @@ export default function About({ auth }) {
                     className="flex items-center gap-1 text-white bg-green-700 hover:bg-green-800 rounded-lg text-sm px-4 py-2">
                     Pievienot
                 </button>
+
+                {successMessage && (
+                    <p className="absolute top-[280px] text-green-500">
+                        {successMessage}
+                    </p>
+                )}
 
                 <AddConvertedAmount
                     isOpen={isModalOpen}
