@@ -12,7 +12,7 @@ export default function About({ auth }) {
     const [currencyTo, setCurrencyTo] = useState("USD");
     const currencyList = ["EUR", "USD", "GBP"];
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [successMessage, setSuccessMessage] = useState("");
+    const [message, setMessage] = useState(null);
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -38,6 +38,14 @@ export default function About({ auth }) {
     .catch(err => console.error(err));
 }, [currencyFrom]);
 
+    const handleClick = () => {
+        if (!startAmount) {
+            showMessage("Lūdzu ievadiet summu!", "error");
+            return;
+        }
+        openModal();
+    };
+
     const handleAddTransaction = async (type) => {
         const payload = {
             amount: converted,
@@ -52,12 +60,21 @@ export default function About({ auth }) {
                 await axios.post('/expense-sources', payload);
             }
 
-            setSuccessMessage("\u2713 Konvertētais apjoms pievienots!");
+            showMessage("\u2713 Konvertētais apjoms pievienots!", "success");
             setIsModalOpen(false);
-            setTimeout(() => setSuccessMessage(""), 5000);
+            setTimeout(() => setMessage("", "success"), 5000);
         } catch (error) {
-            console.error(error);
+            showMessage("Neizdevās saglabāt!");
         }
+    };
+
+    let timeoutId;
+    const showMessage = (text, type) => {
+        clearTimeout(timeoutId);
+        setMessage({ text, type });
+        timeoutId = setTimeout(() => {
+            setMessage(null);
+        }, 5000);
     };
 
     return (
@@ -108,14 +125,20 @@ export default function About({ auth }) {
                     Konvertētais apjoms: {startAmount===""? "":`${converted} ${currencyTo}`}
                 </p>
                 <button
-                    onClick={() => openModal()}
+                    onClick={handleClick}
                     className="flex items-center gap-1 text-white bg-green-700 hover:bg-green-800 rounded-lg text-sm px-4 py-2">
                     Pievienot
                 </button>
 
-                {successMessage && (
-                    <p className="absolute top-[280px] text-green-500">
-                        {successMessage}
+                {message && (
+                    <p
+                        className={`absolute top-[280px] font-semibold ${
+                        message.type === "success"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
+                    >
+                        {message.text}
                     </p>
                 )}
 
