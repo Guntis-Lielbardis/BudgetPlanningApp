@@ -543,7 +543,7 @@ export default function Dashboard() {
                                                 }}
                                             />
 
-                                            <TextInput id="input_income_source" type="number" placeholder="Apjoms" className="h-10 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value={incomeSource} onChange={(e) => setIncomeSource(e.target.value)} required />
+                                            <TextInput id="input_income_source" type="number" placeholder="Apjoms" className="w-[150px] h-10 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value={incomeSource} onChange={(e) => setIncomeSource(e.target.value)} required />
                                             <button onClick={addIncomeSource} className="flex items-center h-10 text-white bg-green-700 hover:bg-green-800 rounded-lg text-sm gap-1 px-4 py-2"><VscAdd className="text-lg"/>Pievienot</button>
                                             <label htmlFor="uploadIncomeFile" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">
                                                 Nolasīt CSV atskaiti
@@ -708,19 +708,19 @@ export default function Dashboard() {
                                                 }}
                                             />
 
-                                            <TextInput id="input_expense_source" type="number" placeholder="Apjoms" className="h-10 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value={expenseSource} onChange={(e) => setExpenseSource(e.target.value)} required />
+                                            <TextInput id="input_expense_source" type="number" placeholder="Apjoms" className="w-[150px] h-10 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-200" value={expenseSource} onChange={(e) => setExpenseSource(e.target.value)} required />
                                             <button onClick={addExpenseSource} className="flex items-center h-10 text-white bg-green-700 hover:bg-green-800 rounded-lg text-sm gap-1 px-4 py-2"><VscAdd className="text-lg"/>Pievienot</button>
                                             <label htmlFor="uploadExpenseFile" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">
                                                 Nolasīt CSV atskaiti
                                             </label>
                                             <br></br>
-                                            <div className="mb-4">
-                                                <label htmlFor="ChangeCategory" className="mr-2 dark:text-gray-200">Filtrēt pēc kategorijas:</label>
+                                            <div className="relative mb-4">
+                                                <label htmlFor="ChangeCategory" className="absolute justify-center dark:text-gray-200">Filtrēt pēc kategorijas:</label>
                                                     <select 
                                                         id="ChangeCategory"
                                                         value={selectedCategory}
                                                         onChange={(e) => setSelectedCategory(e.target.value)}
-                                                        className="rounded-md px-3 py-2 dark:bg-gray-700 dark:text-gray-400">
+                                                        className="absolute ml-[90px] rounded-md px-3 py-2 dark:bg-gray-700 dark:text-gray-400">
                                                         <option value="">Visas kategorijas</option>
                                                         <option value="Pārtika">Pārtika</option>
                                                         <option value="Transports">Transports</option>
