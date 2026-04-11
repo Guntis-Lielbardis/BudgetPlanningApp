@@ -289,16 +289,16 @@ export default function Dashboard() {
         if (!file) return;
     
         const isCSV = file.name.endsWith('.csv');
-        const isXLS = file.name.endsWith('.xls');
+        const isXLS = file.name.match(/\.(xls|xlsx)$/i);
         const reader = new FileReader();
     
-        reader.onload = async (evt) => {
-            const data = evt.target.result;
+        reader.onload = async (e) => {
+            const data = e.target.result;
             let rows;
             let worksheet;
     
             if (isCSV||isXLS) {
-                const workbook = XLSX.read(data, { type: 'string' });
+                const workbook = XLSX.read(data, { type: 'array' });
                 worksheet = workbook.Sheets[workbook.SheetNames[0]];
                 rows = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
             }
@@ -308,10 +308,10 @@ export default function Dashboard() {
             let rawCurrency = null;
             let rawDate = null;
             const labelKeywords = {
-                description: 'apraksts',
-                amount: 'apjoms',
-                currency: 'valūta',
-                date: 'datums',
+                description: 'Apraksts',
+                amount: 'Summa',
+                currency: 'Valūta',
+                date: 'Datums',
             };
     
             const labelsToFind = {
@@ -322,7 +322,7 @@ export default function Dashboard() {
     
             for (let r = 0; r < rows.length; r++) {
                 for (let c = 0; c < rows[r].length; c++) {
-                    const cellValue = String(rows[r][c] || '').toLowerCase().trim();
+                    const cellValue = String(rows[r][c] || '');
                     if (cellValue === currentLabels.description && !description) {
                         description = rows[r + 1]?.[c];
                     }
@@ -330,10 +330,7 @@ export default function Dashboard() {
                         amount = rows[r + 1]?.[c];
                     }
                     if (cellValue === currentLabels.currency && !rawCurrency) {
-                        rawCurrency = rows[r + 1]?.[c] || 'Valūta';
-                        if (rawCurrency?.toUpperCase() === 'EUR' || rawCurrency?.toLowerCase() === 'eiro') {
-                            rawCurrency = 'Eiro €';
-                        }
+                        rawCurrency = rows[r + 1]?.[c];
                     }
                     if (cellValue === currentLabels.date && !rawDate) {
                         rawDate = rows[r + 1]?.[c];
@@ -370,7 +367,7 @@ export default function Dashboard() {
         if (isCSV) {
             reader.readAsText(file);
         } else {
-            reader.readAsBinaryString(file);
+            reader.readAsArrayBuffer(file);
         }
     };
 
