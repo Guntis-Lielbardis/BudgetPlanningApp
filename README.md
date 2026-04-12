@@ -1,5 +1,10 @@
 # 1. Web application for individual budget planning
-It has built-in authentication: email address and password. Functionality offers CRUD operations in dashboard- creating, reading, updating, deleting budget records. Additionally included graphics with Chart.js, pagination, filtering by month or category, comparison between income and expenses, profile page, about page, currency conversion and bug report page. Project was implemented, using MVC architecture. It helps making HTTP requests to database. During development Vite server was used, which allows to dynamically update code and right away observe page changes. Application is hosted in Render: https://budgetplanningapp.onrender.com. For database in production Neon PostgreSQL service was used in Render, but local development- SQLite.
+It has built-in authentication: email address and password. Functionality offers CRUD operations in dashboard- creating, reading, updating, deleting budget records. Additionally included graphics with Chart.js, pagination, filtering by month or category, comparison between income and expenses, profile page, about page, currency conversion and bug report page. Project was implemented, using MVC architecture. It helps making HTTP requests to database. During development Vite server was used, which allows to dynamically update code and right away observe page changes. Application is hosted in Render: https://budgetplanningapp.onrender.com. For database in production Neon PostgreSQL service was used in Render, but local development- SQLite. Below is demo provided. Screen recording captured with Camtasia video editing software.
+
+
+https://github.com/user-attachments/assets/d8e3d2b0-9c2b-43c1-9564-c894f5ae3114
+
+
 ## 1.1. Frontend technologies
 * Javascript
 * React
