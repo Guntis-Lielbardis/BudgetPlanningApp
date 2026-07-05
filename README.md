@@ -48,7 +48,20 @@ Further installation continues in terminal.<br>
 * Download "cacert.pem" file. Then move it to: ```C:\Program Files\php-8.5.3\extras\ssl```
 * In php.ini file add path of "cacert.pem" twice at <b>curl.cainfo</b> and <b>openssl.cafile</b>.
 For example, ```curl.cainfo = "C:\Program Files\php-8.5.3\extras\ssl\cacert.pem"``` and ```openssl.cafile = "C:\Program Files\php-8.5.3\extras\ssl\cacert.pem"```.
-# 3. Future perspectives
+# 3. Feature tests with Pest PHP
+## 3.1. Setting up testing environment
+In order to write tests, Pest PHP needs to be installed with Composer commands: ```composer remove phpunit/phpunit``` and
+```composer require pestphp/pest --dev --with-all-dependencies```. Then it is initialized with: ```./vendor/bin/pest --init```.
+## 3.2. Writing tests
+By default it offers Unit and Feature tests. While unit tests have their advantages, feature tests make more sense to check feature functionality as whole. To get most out of writing tests, it was necessary to check core functionality such as adding income and expense sources and saving to database. The test structure requires defining an action from specific function and an expected outcome. If it matches, the test passes, otherwise it fails. Passed tests are available in folder called <b>tests</b> and subfolder <b>Feature</b>.
+## 3.3. Running tests
+To run tests, it can be done in terminal. Open it from project's location. It is possible to run both income and expense tests one by one or both at once. 
+* Run income test individually with: ```vendor\bin\pest tests/Feature/AddIncomeTest.php```.
+* Run expense test individually with: ```vendor\bin\pest tests/Feature/AddExpenseTest.php```.
+* Run all tests at once with: ```vendor\bin\pest```. Below is a screenshot example from terminal with both passing feature tests.
+<img width="305" height="149" alt="PassedTests" src="https://github.com/user-attachments/assets/32e86427-062d-4011-a4c4-ec6585ddcaad" />
+
+# 4. Future perspectives
 * Personalized budget planning suggestions
 * Reminders in email
 * Additional profile settings
